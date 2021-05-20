@@ -1,8 +1,6 @@
 # Har::Net::Http
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/har/net/http`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This library captures HTTP(S) traffic made by `net/http` as [HAR](http://www.softwareishard.com/blog/har-12-spec/).
 
 ## Installation
 
@@ -22,7 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To capture a HAR, load this library:
+
+```ruby
+require 'har/net/http'
+
+# Reset the har, so that future requests will create a new HAR
+Har::Net::HTTP.har = nil
+```
+
+Then, [make some HTTP requests](https://docs.ruby-lang.org/en/master/Net/HTTP.html).
+If you prefer, you can also make HTTP requests with higher level libraries such as
+[faraday](https://lostisland.github.io/faraday/), [http.rb](https://github.com/httprb/http),
+[rest-client](https://github.com/rest-client/rest-client), [httparty](https://github.com/jnunemaker/httparty)
+or any other library that is built on top of Ruby's `net/http` library.
+
+When you're done, capture the HAR:
+
+```ruby
+har = JSON.stringify(Har::Net::HTTP.har)
+
+# Do what you want with it!
+```
 
 ## Development
 
@@ -32,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/har-net-http.
+Bug reports and pull requests are welcome on GitHub at https://github.com/cucumber/har-net-http.
 
 ## License
 
