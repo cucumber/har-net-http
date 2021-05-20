@@ -65,9 +65,12 @@ RSpec.describe Har::Net::HTTP do
 
   it "captures a HAR" do
     url = start_server("http")
-    Net::HTTP.get(URI("#{url}/sleep"))
+    10.times do
+      Net::HTTP.get(URI("#{url}/sleep"))
+    end
 
-    entry = Har::Net::HTTP.har[:log][:entries][0]
-    expect(entry[:request][:method]).to eq("GET")
+    har = Har::Net::HTTP.har
+    File.write(File.dirname(__FILE__) + '/../../../examples/10-gets.har', JSON.pretty_generate(har))
+    expect(har[:log][:entries][0][:request][:method]).to eq("GET")
   end
 end

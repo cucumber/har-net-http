@@ -2,6 +2,8 @@
 
 This library captures HTTP(S) traffic made by `net/http` as [HAR](http://www.softwareishard.com/blog/har-12-spec/).
 
+You can see examples of captured files [here](./examples). 
+
 ## Installation
 
 Add this line to your application's Gemfile:
